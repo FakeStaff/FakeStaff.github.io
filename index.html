@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FakeTime - Staff</title>
     <link rel="preconnect" href="https://fonts.googleapis.com/">
-<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-<link href="FakeTime%20-%20Staff_files/css2.css" rel="stylesheet">
-    <link rel="stylesheet" href="FakeTime%20-%20Staff_files/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="css2.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="login-container">
@@ -25,37 +25,36 @@
         </form>
     </div>
 
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-<script>
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    fetch('/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username: username, password: password })
-    })
-    .then(response => {
-        if (response.redirected) {
-            // Если произошел редирект, перенаправляем браузер
-            window.location.href = response.url;
-        } else {
-            // Обрабатываем JSON-ответ
-            return response.json();
-        }
-    })
-    .then(data => {
-        if (data) {
-            console.log(data);  // Здесь можно обработать успешный ответ
-        }
-    })
-    .catch(error => console.error('Error:', error));
-});
-
-</script>
-</body></html>
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: username, password: password })
+            })
+            .then(response => {
+                if (response.redirected) {
+                    // Если произошел редирект, перенаправляем браузер
+                    window.location.href = response.url;
+                } else {
+                    // Обрабатываем JSON-ответ
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data) {
+                    console.log(data);  // Здесь можно обработать успешный ответ
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
